@@ -5,9 +5,11 @@ all: clean list wordList
 
 list: list.cpp
 	$(CPP) $(CFLAGS) -o list list.cpp
+	./list NaughtyOrNice 10
 
 wordList: wordList.cpp
 	$(CPP)  $(CFLAGS) -o wordList wordList.cpp
+	./wordList tweets
 
 clean:
 	rm -f *.o;
@@ -15,4 +17,4 @@ clean:
 	rm -f list;
 	rm -f wordList;
 	rm -f words;
-	rm -f lexicalDiversity;
+	rm -f lex;

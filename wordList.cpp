@@ -20,25 +20,30 @@ int main(int argc, char** argv) {
   map<int, string>::reverse_iterator rit;
   ifstream file(argv[1]);
   ofstream words("words");
-
+  ofstream lex("lex");
+  int total = 0;
+  int comp;
 
   if(argc != 2) {
     cout << "Usage: ./wordList [filename]" << endl;
   }
   else {
+    cout << endl;
     cout << "filename: " << argv[1] << endl;
 
 
     if(file.is_open()) {
       while(file.good()) {
 	getline(file, word, ' ');
-
-	if(list.count(word)) {
-	  list[word]++;
-	}
-	else {
-	  list.insert(pair<string, int>(word, 1));
-	}
+	if(word != "") {
+	  total++;
+	  if(list.count(word)) {
+	    list[word]++;
+	  }
+	  else {
+	    list.insert(pair<string, int>(word, 1));
+	  }
+        }
       }
     }
   
@@ -56,7 +61,19 @@ int main(int argc, char** argv) {
 	words.close();
       }
     }
+    cout << endl;
     cout << "output file: words" << endl;
+
+    comp = total/list.size();
+    if(lex.is_open()) {
+      while(lex.good()) {
+	lex << "words: " << list.size() << endl;
+	lex << "lexical diversity: " << comp << endl;
+	lex.close();
+      }
+    }
+    cout << "lexical diversity file: lex" << endl;
+    cout << endl;
 
     
   }
